@@ -5,3 +5,4 @@ dist/
 web-build/
 *.log
 .env
+coverage/

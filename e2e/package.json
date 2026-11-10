@@ -1,0 +1,14 @@
+{
+  "name": "estadio-deportivo-e2e",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pruebas E2E por API del backend Express del estadio deportivo",
+  "packageManager": "pnpm@11.0.9",
+  "scripts": {
+    "test": "playwright test",
+    "report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.65.0"
+  }
+}
