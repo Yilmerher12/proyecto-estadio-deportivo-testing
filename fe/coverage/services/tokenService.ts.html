@@ -34,9 +34,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -48,16 +48,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/4</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
@@ -72,7 +72,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -120,14 +120,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -135,17 +135,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -158,32 +158,32 @@ import * as SecureStore from 'expo-secure-store';
 import type { AuthTokens } from '../types';
 &nbsp;
 // Claves de SecureStore
-const KEYS = <span class="cstat-no" title="statement not covered" >{</span>
+const KEYS = {
   ACCESS: 'auth_access_token',
   REFRESH: 'auth_refresh_token',
 } as const;
 &nbsp;
 /** Guarda access y refresh token en SecureStore */
-export async function <span class="fstat-no" title="function not covered" >saveTokens(t</span>okens: AuthTokens): Promise&lt;void&gt; {
-<span class="cstat-no" title="statement not covered" >  await Promise.all([</span>
+export async function saveTokens(tokens: AuthTokens): Promise&lt;void&gt; {
+  await Promise.all([
     SecureStore.setItemAsync(KEYS.ACCESS, tokens.accessToken),
     SecureStore.setItemAsync(KEYS.REFRESH, tokens.refreshToken),
   ]);
 }
 &nbsp;
 /** Retorna el access token guardado (null si no existe) */
-export async function <span class="fstat-no" title="function not covered" >getAccessToken(): Promise&lt;string | null&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return SecureStore.getItemAsync(KEYS.ACCESS);</span>
+export async function getAccessToken(): Promise&lt;string | null&gt; {
+  return SecureStore.getItemAsync(KEYS.ACCESS);
 }
 &nbsp;
 /** Retorna el refresh token guardado (null si no existe) */
-export async function <span class="fstat-no" title="function not covered" >getRefreshToken(): Promise&lt;string | null&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  return SecureStore.getItemAsync(KEYS.REFRESH);</span>
+export async function getRefreshToken(): Promise&lt;string | null&gt; {
+  return SecureStore.getItemAsync(KEYS.REFRESH);
 }
 &nbsp;
 /** Elimina ambos tokens (logout) */
-export async function <span class="fstat-no" title="function not covered" >clearTokens(): Promise&lt;void&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  await Promise.all([</span>
+export async function clearTokens(): Promise&lt;void&gt; {
+  await Promise.all([
     SecureStore.deleteItemAsync(KEYS.ACCESS),
     SecureStore.deleteItemAsync(KEYS.REFRESH),
   ]);
@@ -195,7 +195,7 @@ export async function <span class="fstat-no" title="function not covered" >clear
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2026-11-10T18:32:04.803Z
+                at 2026-11-10T19:06:07.464Z
             </div>
         <script src="../prettify.js"></script>
         <script>

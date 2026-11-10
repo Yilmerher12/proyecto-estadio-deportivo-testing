@@ -1,0 +1,42 @@
+name: tests
+
+# Corre las pruebas unitarias con cobertura en cada PR y en cada push a main.
+# Si la cobertura baja del umbral de vitest.config.ts, el job sale en rojo.
+# Los E2E de e2e/ no están aquí todavía: necesitan MongoDB y entran más adelante.
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: be
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+        with:
+          package_json_file: be/package.json
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "22"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: fe
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: pnpm/action-setup@v6.1.0
+        with:
+          package_json_file: fe/package.json
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: "22"
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test
