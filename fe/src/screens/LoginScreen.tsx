@@ -87,6 +87,7 @@ export function LoginScreen({ navigation }: LoginScreenProps): React.JSX.Element
         />
 
         <Pressable
+          role="button"
           style={[styles.button, isLoading && styles.buttonDisabled]}
           onPress={handleSubmit(onSubmit)}
           disabled={isLoading}
@@ -100,6 +101,7 @@ export function LoginScreen({ navigation }: LoginScreenProps): React.JSX.Element
       </View>
 
       <Pressable
+        role="link"
         style={styles.linkButton}
         onPress={() => navigation.navigate('Register')}
       >

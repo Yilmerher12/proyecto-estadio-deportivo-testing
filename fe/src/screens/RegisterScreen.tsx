@@ -126,6 +126,7 @@ export function RegisterScreen({ navigation }: RegisterScreenProps): React.JSX.E
         />
 
         <Pressable
+          role="button"
           style={[styles.button, isLoading && styles.buttonDisabled]}
           onPress={handleSubmit(onSubmit)}
           disabled={isLoading}
@@ -139,6 +140,7 @@ export function RegisterScreen({ navigation }: RegisterScreenProps): React.JSX.E
       </View>
 
       <Pressable
+        role="link"
         style={styles.linkButton}
         onPress={() => navigation.navigate('Login')}
       >

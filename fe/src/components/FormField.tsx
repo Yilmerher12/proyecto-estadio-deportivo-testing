@@ -18,11 +18,19 @@ export function FormField({ label, error, ...inputProps }: FormFieldProps): Reac
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
+        // Sin esto el <Text> de la etiqueta queda suelto: un lector de pantalla (y los tests con
+        // getByLabelText) no sabe a qué campo pertenece.
+        aria-label={label}
         style={[styles.input, error ? styles.inputError : null]}
         placeholderTextColor={theme.colors.textMuted}
         {...inputProps}
       />
-      {error ? <Text style={styles.errorText}>{error}</Text> : null}
+      {error ? (
+        // role="alert": el error se anuncia al aparecer, sin que la persona tenga que buscarlo.
+        <Text role="alert" style={styles.errorText}>
+          {error}
+        </Text>
+      ) : null}
     </View>
   );
 }
