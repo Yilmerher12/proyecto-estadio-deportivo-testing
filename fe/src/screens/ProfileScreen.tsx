@@ -76,7 +76,7 @@ export function ProfileScreen(): React.JSX.Element {
       </View>
 
       {/* Logout */}
-      <Pressable style={styles.logoutButton} onPress={handleLogout}>
+      <Pressable role="button" style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Cerrar sesión</Text>
       </Pressable>
     </ScrollView>

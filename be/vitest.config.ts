@@ -20,9 +20,9 @@ export default defineConfig({
       // server.ts solo arranca el puerto y conecta Mongo: no tiene lógica que probar.
       exclude: ['src/server.ts', 'src/**/*.test.ts'],
       reporter: ['text', 'html'],
-      // Cierre de la semana 2 (medido: 30.84 / 26.85 / 23.28 / 30.38, redondeado hacia abajo).
+      // Cierre de la semana 3 (medido: 42.85 / 53.70 / 30.13 / 43.46, redondeado hacia abajo).
       // Solo puede subir: ver docs/cobertura-semanal.md.
-      thresholds: { statements: 30, branches: 26, functions: 23, lines: 30 },
+      thresholds: { statements: 42, branches: 53, functions: 30, lines: 43 },
     },
   },
 });

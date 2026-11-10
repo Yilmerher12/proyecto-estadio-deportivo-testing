@@ -6,8 +6,11 @@ La cobertura mide qué porcentaje del código ejecutan las pruebas unitarias. El
 |---|---|---|---|
 | S1 (línea base) | 0 (0 de 283) | 0 (0 de 75) | 0 / 0 / 0 / 0 en ambos |
 | S2 (cierre) | 30.38 (86 de 283) | 54.66 (41 de 75) | `be`: 30 / 26 / 23 / 30 · `fe`: 53 / 31 / 65 / 54 |
+| S3 (cierre) | 43.46 (123 de 283) | 73.98 (91 de 123) | `be`: 42 / 53 / 30 / 43 · `fe`: 74 / 73 / 84 / 73 |
 
-El reto de la semana 2 pide un piso de 30 % de líneas en cada parte: el backend llega justo (30.38 %) y el frontend lo supera.
+Pisos del bootcamp: 30 % de líneas en la semana 2 y 40 % en la semana 3, en cada parte.
+
+> **Cambio de alcance en el frontend (S3):** hasta la semana 2 el frontend solo medía `schemas/`, `services/` y `stores/` (75 líneas). En la semana 3 se agregaron `screens/` y `components/` (123 líneas en total) para medir también las pantallas. Se midió así, sin excluir pantallas sin pruebas, y se probaron todas las pantallas con lógica para no bajar los umbrales de la semana anterior. `api.ts` y `authService.ts` siguen en 0 %.
 
 > Los E2E de `e2e/` no suman a este porcentaje: arrancan el backend como un proceso aparte y solo cuenta lo que ejecutan los tests de Vitest.
 
@@ -42,3 +45,30 @@ Cambié una regla del código, corrí los tests y confirmé que alguno fallaba. 
 ## Umbral incumplido
 
 Con `pnpm exec vitest run --coverage --coverage.thresholds.lines=50` en `be/` el comando termina con código 1 y el mensaje `Coverage for lines (...) does not meet global threshold (50%)`. Por eso el job del CI queda en rojo cuando la cobertura baja.
+
+## Semana 3: pruebas de componentes y backend al 40 %
+
+Los componentes de React Native se prueban con Vitest, `jsdom` y Testing Library: `vitest.config.ts` hace que el código que pide `react-native` use `react-native-web` (la librería `react-native` está escrita en Flow y Node no la lee), así los componentes se dibujan como HTML. `vitest.setup.ts` agrega los matchers de jest-dom y limpia el DOM entre tests.
+
+Frontend (20 tests nuevos, 45 en total):
+- `screens/LoginScreen.test.tsx` (componente principal de la semana): campos con las credenciales por defecto, envío con lo escrito, mensajes de validación de usuario y contraseña, botón deshabilitado mientras carga, alerta si falla y enlace a "Crear cuenta".
+- `screens/RegisterScreen.test.tsx`: formulario vacío, un mensaje por campo inválido, confirmación de contraseña distinta, envío sin `confirmPassword`, alerta si falla y enlace a "Iniciar sesión".
+- `screens/HomeScreen.test.tsx` (lista con estados): cargando, con datos, vacío y error.
+- `screens/ProfileScreen.test.tsx`: datos del usuario, valores por defecto sin usuario y cierre de sesión solo tras confirmar.
+
+Arreglos de accesibilidad en los componentes (los tests con consultas accesibles fallaron sin ellos):
+- `FormField`: `aria-label` en el campo (la etiqueta era un texto suelto) y `role="alert"` en el mensaje de error.
+- `LoginScreen`, `RegisterScreen` y `ProfileScreen`: `role="button"` en los botones y `role="link"` en los enlaces de navegación.
+
+Backend (15 tests nuevos, 60 en total):
+- `middlewares/error.middleware.test.ts`: AppError, errores de validación (422 con los campos), id mal formado (400), archivo muy grande, error de carga desconocido y error interno sin revelar el mensaje.
+- `middlewares/auth.middleware.test.ts`: se agregó `authenticate` (sin header, sin "Bearer ", token inválido y token válido).
+- `middlewares/upload.middleware.test.ts`: acepta JPEG, PNG y WebP reales y rechaza un archivo que dice ser imagen pero no lo es.
+
+### Mutaciones de la semana 3
+
+| Mutante | Test que lo detectó |
+|---|---|
+| `LoginScreen`: `disabled={isLoading}` por `disabled={false}` | `should disable the button while the login is in progress` |
+| `HomeScreen`: `if (isError)` por `if (!isError)` | `should greet the user and list one card per product`, `should show the empty message when the catalog has no products` y `should show the error message and no catalog when the request fails` |
+| `error.middleware`: `issue.path.slice(1)` por `issue.path.slice(0)` | `should answer 422 with the invalid fields when the validation fails` |
