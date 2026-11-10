@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Estadio Deportivo - Concesiones",
+    "slug": "estadio-deportivo-concesiones",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "bcauth08",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "dev.bcreactnative.auth08"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0f172a"
+      },
+      "package": "dev.bcreactnative.auth08"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
