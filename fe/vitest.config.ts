@@ -10,8 +10,9 @@ export default defineConfig({
       include: ['src/schemas/**', 'src/services/**', 'src/stores/**'],
       exclude: ['src/**/*.test.ts'],
       reporter: ['text', 'html'],
-      // Línea base de la semana 1 (0 %). Solo puede subir: ver docs/cobertura-semanal.md.
-      thresholds: { statements: 0, branches: 0, functions: 0, lines: 0 },
+      // Cierre de la semana 2 (medido: 53.94 / 31.57 / 65.21 / 54.66, redondeado hacia abajo).
+      // Solo puede subir: ver docs/cobertura-semanal.md.
+      thresholds: { statements: 53, branches: 31, functions: 65, lines: 54 },
     },
   },
 });
