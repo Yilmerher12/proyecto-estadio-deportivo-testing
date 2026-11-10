@@ -10,6 +10,8 @@ export default defineConfig({
       // server.ts solo arranca el puerto y conecta Mongo: no tiene lógica que probar.
       exclude: ['src/server.ts', 'src/**/*.test.ts'],
       reporter: ['text', 'html'],
+      // Línea base de la semana 1 (0 %). Solo puede subir: ver docs/cobertura-semanal.md.
+      thresholds: { statements: 0, branches: 0, functions: 0, lines: 0 },
     },
   },
 });

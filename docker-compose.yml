@@ -1,0 +1,13 @@
+# MongoDB solo para pruebas: puerto 27018 para no chocar con un Mongo local en 27017.
+# No guarda datos entre reinicios (sin volumen): cada `down` deja la BD limpia.
+services:
+  estadio_mongo_test:
+    image: mongo:8.0.4
+    container_name: estadio_mongo_test
+    ports:
+      - "27018:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
